@@ -110,7 +110,7 @@ function sendMessage() {
   const mailSubj = encodeURIComponent(subject || 'Portfolio Contact');
 
   // Opens the user's default mail client
-  window.location.href = `mailto:juanpedro.delacruz@email.com?subject=${mailSubj}&body=${mailBody}`;
+  window.location.href = `mailto:ronaldmischa@gmail.com?subject=${mailSubj}&body=${mailBody}`;
 
   status.style.display = 'block';
   status.style.color   = '#22d3a0';
