@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rmgacis.github.io/sitemap.xml
