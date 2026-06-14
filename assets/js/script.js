@@ -124,3 +124,18 @@ document.addEventListener('DOMContentLoaded', () => {
   initSkillBars();
   initActiveNav();
 });
+/* ── BACK TO TOP ── */
+function initBackToTop() {
+  const btn = document.getElementById('backToTop');
+  if (!btn) return;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initBackToTop);
