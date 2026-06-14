@@ -288,7 +288,7 @@ section::before {
   padding: 36px;
   clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
 }
-.about-stat { text-align: center; padding: 20px 8px; }
+.about-stat { text-align: center; padding: 20px 8px; overflow: hidden; }
 .about-stat .num {
   font-family: 'Rajdhani', sans-serif;
   font-size: 2.5rem;
@@ -302,6 +302,8 @@ section::before {
   text-transform: uppercase;
   color: var(--text-muted);
   margin-top: 4px;
+  white-space: normal;
+  word-break: break-word;
 }
 .about-stat-divider { border-right: 1px solid var(--border); }
 
@@ -697,9 +699,9 @@ footer .footer-sub { margin-top: 4px; font-size: 0.75rem; }
   .hero-eyebrow { letter-spacing: 3px; }
   .hero-avatar { width: 220px; height: 220px; font-size: 4rem; }
   #home::after { width: 80%; right: -20%; }
-  .about-stat { padding: 14px 4px; }
+  .about-stat { padding: 14px 6px; }
   .about-stat .num { font-size: 1.7rem; }
-  .about-stat .label { font-size: 0.55rem; letter-spacing: 0.5px; }
+  .about-stat .label { font-size: 0.55rem; letter-spacing: 0.5px; white-space: normal; word-break: break-word; }
 }
 
 @media (max-width: 480px) {
