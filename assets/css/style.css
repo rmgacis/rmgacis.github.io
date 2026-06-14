@@ -730,6 +730,8 @@ footer .footer-sub { margin-top: 4px; font-size: 0.75rem; }
   .about-stat { padding: 14px 6px; }
   .about-stat .num { font-size: 1.7rem; }
   .about-stat .label { font-size: 0.55rem; letter-spacing: 0.5px; white-space: normal; word-break: break-word; }
+  .about-extra-text,
+  #about p { text-align: left; }
 }
 
 @media (max-width: 480px) {
