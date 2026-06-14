@@ -307,6 +307,34 @@ section::before {
 }
 .about-stat-divider { border-right: 1px solid var(--border); }
 
+.about-extra-card {
+  background: var(--bg-card2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 18px 20px;
+  height: 100%;
+}
+.about-extra-icon {
+  font-size: 1.3rem;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.about-extra-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.about-extra-text {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  text-align: justify;
+}
+
 /* ── EDUCATION ── */
 #education { background: var(--bg-deep); }
 .edu-timeline { position: relative; padding-left: 32px; }
