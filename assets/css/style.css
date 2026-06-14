@@ -697,7 +697,7 @@ footer .footer-sub { margin-top: 4px; font-size: 0.75rem; }
   .contact-socials { flex-wrap: wrap; }
   .hero-name { font-size: 3rem; }
   .hero-eyebrow { letter-spacing: 3px; }
-  .hero-avatar { width: 220px; height: 220px; font-size: 4rem; }
+  .hero-avatar { width: 280px; height: 280px; font-size: 5rem; }
   #home::after { width: 80%; right: -20%; }
   .about-stat { padding: 14px 6px; }
   .about-stat .num { font-size: 1.7rem; }
@@ -707,7 +707,7 @@ footer .footer-sub { margin-top: 4px; font-size: 0.75rem; }
 @media (max-width: 480px) {
   .hero-name { font-size: 2.4rem; }
   .hero-eyebrow { font-size: 0.65rem; letter-spacing: 2px; }
-  .hero-avatar { width: 180px; height: 180px; font-size: 3rem; }
+  .hero-avatar { width: 220px; height: 220px; font-size: 4rem; }
   .hero-desc { font-size: 0.88rem; }
   #home::after { width: 100%; right: -30%; }
 }
