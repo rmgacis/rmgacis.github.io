@@ -288,7 +288,7 @@ section::before {
   padding: 36px;
   clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
 }
-.about-stat { text-align: center; padding: 20px 0; }
+.about-stat { text-align: center; padding: 20px 8px; }
 .about-stat .num {
   font-family: 'Rajdhani', sans-serif;
   font-size: 2.5rem;
@@ -297,8 +297,8 @@ section::before {
   line-height: 1;
 }
 .about-stat .label {
-  font-size: 0.7rem;
-  letter-spacing: 2px;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--text-muted);
   margin-top: 4px;
