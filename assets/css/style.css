@@ -603,11 +603,14 @@ section::before {
 .project-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  padding: 28px;
+  padding: 0;
   height: 100%;
   clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
   transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .project-card:hover {
   border-color: var(--accent);
@@ -622,6 +625,28 @@ section::before {
 .project-card:hover .project-title {
   color: var(--accent);
 }
+.project-thumb {
+  background: var(--bg-card2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 0;
+  transition: background 0.25s ease;
+}
+.project-card:hover .project-thumb { background: var(--bg-deep); }
+.project-thumb i {
+  font-size: 2.6rem;
+  color: var(--accent-light);
+  opacity: 0.85;
+  transition: color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
+}
+.project-card:hover .project-thumb i {
+  color: var(--accent);
+  opacity: 1;
+  transform: scale(1.08);
+}
+.project-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
 .project-tag {
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.65rem;
@@ -676,6 +701,7 @@ section::before {
   text-transform: uppercase;
   color: #22d3a0;
   display: flex; align-items: center; gap: 4px;
+  z-index: 2;
 }
 .project-status::before {
   content: '';
