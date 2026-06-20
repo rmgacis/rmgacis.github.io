@@ -1,14 +1,19 @@
 const GITHUB_USERNAME = 'rmgacis'; 
 
 
-async function loadGitHub() {
+async function loadGitHub(isRetry = false) {
   try {
     const [userRes, reposRes] = await Promise.all([
       fetch(`https://api.github.com/users/${GITHUB_USERNAME}`),
       fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`)
     ]);
 
-    if (!userRes.ok) throw new Error('GitHub API error');
+    if (!userRes.ok) {
+      if (userRes.status === 403 || userRes.status === 429) {
+        throw new Error('rate-limited');
+      }
+      throw new Error('GitHub API error');
+    }
 
     const user  = await userRes.json();
     const repos = await reposRes.json();
@@ -29,8 +34,19 @@ async function loadGitHub() {
     loadContributionCalendar();
 
   } catch (e) {
+    if (!isRetry) {
+      setTimeout(() => loadGitHub(true), 1500);
+      return;
+    }
+
     document.getElementById('gh-loading').style.display = 'none';
-    document.getElementById('gh-error').style.display   = 'block';
+    const errorBox = document.getElementById('gh-error');
+    if (e.message === 'rate-limited') {
+      errorBox.innerHTML = `<i class="fas fa-clock me-2"></i> GitHub's public API limit was reached for this site right now. Please refresh in a few minutes — or <a href="https://github.com/${GITHUB_USERNAME}" target="_blank" style="color:var(--accent);">view the profile directly →</a>`;
+    } else {
+      errorBox.innerHTML = `<i class="fas fa-exclamation-triangle me-2"></i> Could not load GitHub data. <a href="https://github.com/${GITHUB_USERNAME}" target="_blank" style="color:var(--accent);">View profile directly →</a>`;
+    }
+    errorBox.style.display = 'block';
   }
 }
 
