@@ -13,7 +13,6 @@ async function loadGitHub() {
     const user  = await userRes.json();
     const repos = await reposRes.json();
 
-    // Profile card
     document.getElementById('gh-avatar').src   = user.avatar_url ?? '';
     document.getElementById('gh-name').textContent   = (user.name || user.login || '—').toUpperCase();
     document.getElementById('gh-handle').textContent  = `@${user.login}`;
@@ -22,13 +21,11 @@ async function loadGitHub() {
     document.getElementById('gh-followers').textContent = user.followers     ?? '—';
     document.getElementById('gh-following').textContent = user.following    ?? '—';
 
-    // Latest repository (most recently updated, excludes forks)
     renderLatestRepo(Array.isArray(repos) ? repos.find(r => !r.fork) || repos[0] : null);
 
     document.getElementById('gh-loading').style.display = 'none';
     document.getElementById('gh-data').style.display    = 'block';
 
-    // Contribution calendar (separate, non-blocking fetch)
     loadContributionCalendar();
 
   } catch (e) {
@@ -74,7 +71,7 @@ async function loadContributionCalendar() {
     if (!res.ok) throw new Error('Calendar API error');
     const data = await res.json();
 
-    const days = (data.contributions || []).slice(-371); // ~53 weeks
+    const days = (data.contributions || []).slice(-371); 
     grid.innerHTML = days.map(d => {
       const dateLabel = new Date(d.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
       return `<div class="gh-day-cell" data-level="${d.level}" title="${d.count} contributions on ${dateLabel}"></div>`;

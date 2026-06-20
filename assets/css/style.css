@@ -1,9 +1,4 @@
-/* ============================================================
-   PORTFOLIO — style.css
-   Valorant-themed | Blue Edition | BSIT Student Portfolio
-   ============================================================ */
 
-/* ── CSS VARIABLES ── */
 :root {
   --bg-deep:    #0a0e16;
   --bg-mid:     #111729;
@@ -21,7 +16,6 @@
   --border:     rgba(0,212,255,0.18);
 }
 
-/* ── RESET & BASE ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
@@ -34,7 +28,6 @@ body {
   overflow-x: hidden;
 }
 
-/* ── SCANLINE OVERLAY ── */
 body::before {
   content: '';
   position: fixed;
@@ -50,7 +43,6 @@ body::before {
   z-index: 9999;
 }
 
-/* ── NAVBAR ── */
 .navbar {
   background: rgba(7,11,23,0.92);
   backdrop-filter: blur(12px);
@@ -97,7 +89,6 @@ body::before {
 .navbar-toggler { border-color: var(--border); }
 .navbar-toggler-icon { filter: invert(1) sepia(1) saturate(5) hue-rotate(175deg); }
 
-/* ── SECTION BASE ── */
 section { padding: 90px 0; transition: background 0.4s ease; position: relative; }
 section::before {
   content: '';
@@ -108,7 +99,6 @@ section::before {
   pointer-events: none;
 }
 
-/* ── SLASH DIVIDER (Valorant motif) ── */
 .slash-divider {
   display: flex;
   align-items: center;
@@ -144,7 +134,6 @@ section::before {
 }
 .section-title span { color: var(--accent); }
 
-/* ── HERO ── */
 #home::before { display: none; }
 #home {
   min-height: 100vh;
@@ -239,7 +228,6 @@ section::before {
   color: var(--accent);
 }
 
-/* Decorative corners */
 .corner-deco {
   position: absolute;
   width: 24px; height: 24px;
@@ -251,7 +239,6 @@ section::before {
 .corner-deco.bl { bottom: -8px; left: -8px; border-width: 0 0 2px 2px; }
 .corner-deco.br { bottom: -8px; right: -8px; border-width: 0 2px 2px 0; }
 
-/* ── BUTTONS ── */
 .btn-slash {
   font-family: 'Rajdhani', sans-serif;
   font-weight: 700;
@@ -283,7 +270,6 @@ section::before {
 .btn-slash-fill:hover { background: var(--accent2); color: var(--bg-deep); }
 .btn-slash-fill:active { background: var(--accent2); }
 
-/* ── ABOUT ── */
 #about { background: var(--bg-mid); }
 .about-card {
   background: var(--bg-card);
@@ -338,7 +324,6 @@ section::before {
   text-align: justify;
 }
 
-/* ── EDUCATION ── */
 #education { background: var(--bg-deep); }
 .edu-timeline { position: relative; padding-left: 32px; }
 .edu-timeline::before {
@@ -379,12 +364,10 @@ section::before {
 }
 .edu-school { color: var(--text-muted); font-size: 0.9rem; }
 
-/* ── GITHUB ── */
 #github { background: var(--bg-mid); }
 .gh-loading { color: var(--text-muted); font-size: 0.85rem; }
 .gh-error { color: #ff6b6b; font-size: 0.85rem; }
 
-/* Profile card */
 .gh-profile-card {
   background: var(--bg-card2);
   border: 1px solid var(--border);
@@ -450,7 +433,6 @@ section::before {
   gap: 6px;
 }
 
-/* Contribution calendar */
 .gh-calendar-card {
   background: var(--bg-card2);
   border: 1px solid var(--border);
@@ -493,7 +475,6 @@ section::before {
 .gh-day-cell[data-level="4"] { background: var(--accent); }
 .gh-calendar-note { font-size: 0.78rem; color: var(--text-muted); margin: 12px 0 0; }
 
-/* Latest repository */
 .gh-latest-label {
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.65rem;
@@ -553,7 +534,6 @@ section::before {
 .gh-repo-lang-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; }
 
 
-/* ── TECH STACK ── */
 #techstack { background: var(--bg-deep); }
 .tech-cat-label {
   font-family: 'Rajdhani', sans-serif;
@@ -598,7 +578,6 @@ section::before {
   transition: width 1.4s ease;
 }
 
-/* ── PROJECTS ── */
 #projects { background: var(--bg-mid); }
 .project-card {
   background: var(--bg-card);
@@ -711,7 +690,6 @@ section::before {
   animation: pulse 1.5s ease infinite;
 }
 
-/* ── CERTIFICATIONS ── */
 #certifications { background: var(--bg-deep); }
 .cert-card {
   background: var(--bg-card);
@@ -744,7 +722,6 @@ section::before {
   margin-top: 4px;
 }
 
-/* ── CONTACT ── */
 #contact { background: var(--bg-mid); }
 .contact-info-item {
   display: flex; align-items: flex-start; gap: 16px;
@@ -787,7 +764,6 @@ section::before {
 }
 .contact-social-link:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
 
-/* Form */
 .form-control,
 .form-select {
   background: var(--bg-card2) !important;
@@ -834,7 +810,6 @@ section::before {
   width: 100%;
 }
 
-/* ── FOOTER ── */
 footer {
   background: var(--bg-deep);
   border-top: 1px solid var(--border);
@@ -845,7 +820,6 @@ footer p { color: var(--text-muted); font-size: 0.82rem; }
 footer span { color: var(--accent); }
 footer .footer-sub { margin-top: 4px; font-size: 0.75rem; }
 
-/* ── ANIMATIONS ── */
 @keyframes glitch-in {
   0%   { opacity: 0; transform: translateX(-12px) skewX(3deg); }
   60%  { opacity: 1; transform: translateX(2px) skewX(-1deg); }
@@ -854,11 +828,9 @@ footer .footer-sub { margin-top: 4px; font-size: 0.75rem; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 @keyframes pulse { 0%,100%{opacity:1; transform:scale(1)} 50%{opacity:0.5; transform:scale(1.4)} }
 
-/* ── SCROLL REVEAL ── */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ── RESPONSIVE ── */
 @media (max-width: 767px) {
   section { padding: 64px 0; }
   .gh-profile-stats { grid-template-columns: repeat(3, 1fr); }
@@ -872,7 +844,6 @@ footer .footer-sub { margin-top: 4px; font-size: 0.75rem; }
   .about-extra-text,
   #about p { text-align: left; }
 
-  /* Card padding — generous desktop padding feels heavy on small screens */
   .about-card,
   .contact-form-box,
   .gh-profile-card,
@@ -881,20 +852,16 @@ footer .footer-sub { margin-top: 4px; font-size: 0.75rem; }
   .project-body { padding: 22px; }
   .cert-card { padding: 18px; gap: 12px; }
 
-  /* About info row (location / BSIT / role / hobby) — drop to single column so text has room */
   #about .row.g-2 .col-6 { flex: 0 0 100%; width: 100%; max-width: 100%; }
 
-  /* GitHub profile mini-stats — tighten label so 3 columns stay comfortable */
   .gh-profile-stat { padding: 12px 4px; }
   .gh-profile-stat .gh-num { font-size: 1.35rem; }
   .gh-profile-stat .gh-label { font-size: 0.56rem; letter-spacing: 0.5px; }
   .gh-profile-top { flex-wrap: wrap; }
 
-  /* Project thumbnail icon — slightly smaller on phones */
   .project-thumb { padding: 28px 0; }
   .project-thumb i { font-size: 2.1rem; }
 
-  /* Contact info rows — icon + text can get tight, give breathing room */
   .contact-info-item { gap: 12px; }
 }
 
@@ -912,7 +879,6 @@ footer .footer-sub { margin-top: 4px; font-size: 0.75rem; }
   .gh-repo-card,
   .edu-card { padding: 18px; }
 
-  /* Three-up GitHub mini-stats are the tightest fit on the smallest phones */
   .gh-profile-stats { gap: 6px; }
   .gh-profile-stat { padding: 10px 2px; }
   .gh-profile-stat .gh-num { font-size: 1.15rem; }
@@ -924,7 +890,7 @@ footer .footer-sub { margin-top: 4px; font-size: 0.75rem; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
-/* ── TECH STACK LOGO GRID ── */
+
 .techstack-logo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
@@ -957,7 +923,7 @@ footer .footer-sub { margin-top: 4px; font-size: 0.75rem; }
   font-family: 'Rajdhani', sans-serif;
   font-weight: 600;
 }
-/* ── BACK TO TOP ── */
+
 #backToTop {
   position: fixed;
   bottom: 28px;
