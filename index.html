@@ -213,55 +213,58 @@
         <div id="gh-loading" class="gh-loading text-center py-4">
           <i class="fas fa-circle-notch fa-spin me-2"></i> Loading GitHub data…
         </div>
+
         <div id="gh-data" style="display:none;">
-          <div class="github-stat-grid mb-3">
-            <div class="gh-stat-card">
-              <div class="gh-num" id="gh-repos">—</div>
-              <div class="gh-label">Repositories</div>
-            </div>
-            <div class="gh-stat-card">
-              <div class="gh-num" id="gh-followers">—</div>
-              <div class="gh-label">Followers</div>
-            </div>
-            <div class="gh-stat-card">
-              <div class="gh-num" id="gh-following">—</div>
-              <div class="gh-label">Following</div>
-            </div>
-            <div class="gh-stat-card">
-              <div class="gh-num" id="gh-stars">—</div>
-              <div class="gh-label">Stars Received</div>
-            </div>
-          </div>
-          <div class="row g-3">
-            <div class="col-md-4">
-              <div class="gh-streak-box">
-                <div style="font-size:1.6rem; color:var(--accent); margin-bottom:4px;">🔥</div>
-                <div class="gh-streak-num">41</div>
-                <div class="gh-streak-label">Total Contributions</div>
-                <div class="gh-streak-date">May 25 - Present</div>
-                <div class="gh-contributions-bar mt-3">
-                  <div class="gh-contributions-fill" id="gh-contrib-bar"></div>
+          <div class="row g-3 mb-3">
+            <!-- Profile card -->
+            <div class="col-lg-5">
+              <div class="gh-profile-card">
+                <div class="gh-profile-top">
+                  <img id="gh-avatar" class="gh-avatar" src="" alt="GitHub avatar" />
+                  <div>
+                    <div class="gh-profile-label">GitHub Profile</div>
+                    <div class="gh-profile-name" id="gh-name">—</div>
+                    <div class="gh-profile-handle" id="gh-handle">—</div>
+                  </div>
                 </div>
+                <p class="gh-profile-bio" id="gh-bio"></p>
+                <div class="gh-profile-stats">
+                  <div class="gh-profile-stat">
+                    <div class="gh-num" id="gh-repos">—</div>
+                    <div class="gh-label">Repos</div>
+                  </div>
+                  <div class="gh-profile-stat">
+                    <div class="gh-num" id="gh-followers">—</div>
+                    <div class="gh-label">Followers</div>
+                  </div>
+                  <div class="gh-profile-stat">
+                    <div class="gh-num" id="gh-following">—</div>
+                    <div class="gh-label">Following</div>
+                  </div>
+                </div>
+                <div class="gh-profile-live"><i class="fas fa-check-circle"></i> Live public data from GitHub</div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="gh-streak-box">
-                <div style="font-size:1.6rem; color:var(--accent); margin-bottom:4px;">⚡</div>
-                <div class="gh-streak-num">8</div>
-                <div class="gh-streak-label">Current Streak</div>
-                <div class="gh-streak-date">Jun 5 – Jun 12</div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="gh-streak-box">
-                <div style="font-size:1.6rem; color:var(--accent); margin-bottom:4px;">🏆</div>
-                <div class="gh-streak-num">8</div>
-                <div class="gh-streak-label">Longest Streak</div>
-                <div class="gh-streak-date">Jun 5 – Jun 12</div>
+
+            <!-- Contribution calendar -->
+            <div class="col-lg-7">
+              <div class="gh-calendar-card">
+                <div class="gh-calendar-label">Contribution Calendar</div>
+                <div class="gh-calendar-title">Coding Consistency</div>
+                <div class="gh-calendar-scroll">
+                  <div id="gh-calendar" class="gh-calendar-grid"></div>
+                </div>
+                <p class="gh-calendar-note">The calendar reflects contributions that are publicly visible on GitHub. Scroll horizontally on smaller screens.</p>
               </div>
             </div>
           </div>
+
+          <!-- Latest repository -->
+          <div class="gh-latest-label">Latest Work</div>
+          <div class="gh-latest-title">Public Repository</div>
+          <div id="gh-latest-repo" class="gh-repo-card"></div>
         </div>
+
         <div id="gh-error" style="display:none;" class="gh-error">
           <i class="fas fa-exclamation-triangle me-2"></i> Could not load GitHub data.
           <a href="https://github.com/rmgacis" target="_blank" style="color:var(--accent);">View profile directly →</a>
@@ -359,7 +362,7 @@
         <div class="project-card">
           <div class="project-tag">Game</div>
           <div class="project-title">Pixel Defense</div>
-          <p class="project-desc">The journey starts in a fictional world where a horde of monster trying to push mankind to extinction. Pixel Defense is a standard tower defense game using Pygame. It has unlimited waves with difficulty being scaled up for both weapons and enemies.</p>
+          <p class="project-desc">Pixel Defense is a Pygame-based tower defense game set in a world where humanity fights against endless waves of monsters. Players defend against increasingly powerful enemies using weapons that can be upgraded as the difficulty rises.</p>
           <div class="project-tech">
             <span>Python</span><span>Pygame</span>
           </div>
@@ -372,7 +375,7 @@
         <div class="project-card">
           <div class="project-tag">Mobile App</div>
           <div class="project-title">APO</div>
-          <p class="project-desc">Formerly known as Alal-AI, is a smart mobile app for medication reminder and elder care. Its core feature is APO, a conversational AI chatbot that speaks to elders. The app also handles schedules, messages, and alerts, with a guardian dashboard for setting reminders and an elder mode that keeps interactions minimal.</p>
+          <p class="project-desc">APO, formerly known as Alal-AI, is a smart mobile application designed for medication reminders and elderly care.</p>
           <div class="project-tech">
             <span>Mobile App</span><span>AI Chatbot</span>
           </div>
@@ -403,6 +406,7 @@
             <div>
               <div class="cert-title">TrendAI UCTF Participant</div>
               <div class="cert-issuer">Cybersecurity Capture-the-Flag Competition</div>
+              <p class="cert-desc">Participated in the TrendAI UCTF, a cybersecurity capture-the-flag competition that tested my skills in ethical hacking, cryptography, and problem-solving.</p>
               <div class="cert-date">2025</div>
             </div>
           </div>
@@ -411,6 +415,7 @@
             <div>
               <div class="cert-title">PUP Hackathon: Uthack ng Puhunan — Champion</div>
               <div class="cert-issuer">Team Devunix · Project: APO</div>
+              <p class="cert-desc">Champion of the PUP Hackathon: Uthack ng Puhunan, where our team developed APO, a smart mobile application for medication reminders and elderly care.</p>
               <div class="cert-date">2025</div>
             </div>
           </div>
@@ -419,6 +424,16 @@
             <div>
               <div class="cert-title">DOST-PUP Pylon TBI Incubation Program — Graduate</div>
               <div class="cert-issuer">Team Devunix · Project: APO</div>
+              <p class="cert-desc">Completed the incubation program for the APO smart mobile application. It involved gaining mentorship and resources to refine the project into a viable business.</p>
+              <div class="cert-date">2026</div>
+            </div>
+          </div>
+          <div class="cert-card reveal">
+            <div class="cert-icon"><i class="fas fa-trophy"></i></div>
+            <div>
+              <div class="cert-title">ASEAN AI Hackathon 2026</div>
+              <div class="cert-issuer">P2A &amp; AAIC · 2026</div>
+              <p class="cert-desc">Participants in the ASEAN AI Hackathon 2026. The event brought together talented groups from across the ASEAN region to tackle real-world challenges using artificial intelligence.</p>
               <div class="cert-date">2026</div>
             </div>
           </div>

@@ -5,17 +5,19 @@
 
 /* ── CSS VARIABLES ── */
 :root {
-  --bg-deep:    #070b17;
-  --bg-mid:     #0d1526;
-  --bg-card:    #111d35;
-  --bg-card2:   #0f1a30;
+  --bg-deep:    #0a0e16;
+  --bg-mid:     #111729;
+  --bg-card:    #161f38;
+  --bg-card2:   #131c33;
   --accent:     #00d4ff;
   --accent2:    #0099cc;
-  --accent-dim: rgba(0,212,255,0.12);
-  --accent-glow:rgba(0,212,255,0.35);
+  --accent-light: #6fe3ff;
+  --accent-dim: rgba(0,212,255,0.14);
+  --accent-glow:rgba(0,212,255,0.30);
   --slash:      #00d4ff;
-  --text:       #e8edf5;
-  --text-muted: #7a8ba8;
+  --text:       #ffffff;
+  --text-muted: #ced6e4;
+  --placeholder: #7e8aa0;
   --border:     rgba(0,212,255,0.18);
 }
 
@@ -130,7 +132,7 @@ section::before {
   font-size: 0.7rem;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-light); font-weight: 600;
 }
 .section-title {
   font-family: 'Rajdhani', sans-serif;
@@ -168,7 +170,7 @@ section::before {
   font-size: 0.75rem;
   letter-spacing: 5px;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-light); font-weight: 600;
   margin-bottom: 16px;
 }
 .hero-name {
@@ -366,7 +368,7 @@ section::before {
   font-size: 0.7rem;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-light); font-weight: 600;
 }
 .edu-degree {
   font-family: 'Rajdhani', sans-serif;
@@ -379,67 +381,177 @@ section::before {
 
 /* ── GITHUB ── */
 #github { background: var(--bg-mid); }
-.github-stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-.gh-stat-card {
+.gh-loading { color: var(--text-muted); font-size: 0.85rem; }
+.gh-error { color: #ff6b6b; font-size: 0.85rem; }
+
+/* Profile card */
+.gh-profile-card {
   background: var(--bg-card2);
   border: 1px solid var(--border);
   padding: 24px;
-  text-align: center;
-  transition: border-color 0.2s, transform 0.2s;
+  height: 100%;
   clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
 }
-.gh-stat-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-.gh-stat-card .gh-num {
+.gh-profile-top { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.gh-avatar {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.gh-profile-label {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 2.2rem;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-light); font-weight: 600;
+}
+.gh-profile-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+.gh-profile-handle { font-size: 0.82rem; color: var(--text-muted); }
+.gh-profile-bio { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px; }
+.gh-profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.gh-profile-stat {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 14px 8px;
+  text-align: center;
+}
+.gh-profile-stat .gh-num {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.6rem;
   font-weight: 700;
   color: var(--accent);
   line-height: 1;
 }
-.gh-stat-card .gh-label {
-  font-size: 0.7rem;
-  letter-spacing: 2px;
+.gh-profile-stat .gh-label {
+  font-size: 0.62rem;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--text-muted);
   margin-top: 4px;
 }
-.gh-streak-box {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-top: 3px solid var(--accent);
-  padding: 28px;
-  text-align: center;
+.gh-profile-live {
+  font-size: 0.75rem;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
-.gh-streak-num {
+
+/* Contribution calendar */
+.gh-calendar-card {
+  background: var(--bg-card2);
+  border: 1px solid var(--border);
+  padding: 24px;
+  height: 100%;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+}
+.gh-calendar-label {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 3.5rem;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-light); font-weight: 600;
+  margin-bottom: 4px;
+}
+.gh-calendar-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.gh-calendar-scroll { overflow-x: auto; padding-bottom: 4px; }
+.gh-calendar-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, 11px);
+  gap: 3px;
+  width: max-content;
+}
+.gh-day-cell {
+  width: 11px;
+  height: 11px;
+  background: var(--bg-card);
+  border-radius: 2px;
+}
+.gh-day-cell[data-level="1"] { background: rgba(0,212,255,0.25); }
+.gh-day-cell[data-level="2"] { background: rgba(0,212,255,0.5); }
+.gh-day-cell[data-level="3"] { background: rgba(0,212,255,0.75); }
+.gh-day-cell[data-level="4"] { background: var(--accent); }
+.gh-calendar-note { font-size: 0.78rem; color: var(--text-muted); margin: 12px 0 0; }
+
+/* Latest repository */
+.gh-latest-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-light); font-weight: 600;
+  margin-bottom: 4px;
+}
+.gh-latest-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.gh-repo-card {
+  background: var(--bg-card2);
+  border: 1px solid var(--border);
+  padding: 24px;
+  transition: border-color 0.2s, transform 0.2s;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+}
+.gh-repo-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.gh-repo-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.gh-repo-icon {
+  width: 38px; height: 38px;
+  background: var(--accent-dim);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent);
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+.gh-repo-meta { font-size: 0.8rem; color: var(--text-muted); display: flex; gap: 14px; }
+.gh-repo-meta span { display: inline-flex; align-items: center; gap: 4px; }
+.gh-repo-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--accent);
-  line-height: 1;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
-.gh-streak-label {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
+.gh-repo-name:hover { color: var(--text); }
+.gh-repo-desc { color: var(--text-muted); font-size: 0.85rem; margin: 8px 0 16px; }
+.gh-repo-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
   color: var(--text-muted);
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
 }
-.gh-streak-date { font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; }
-.gh-loading { color: var(--text-muted); font-size: 0.85rem; }
-.gh-error { color: #ff6b6b; font-size: 0.85rem; }
-.gh-contributions-bar {
-  height: 6px;
-  background: var(--bg-card2);
-  border-radius: 0;
-  overflow: hidden;
-  margin-top: 8px;
-}
-.gh-contributions-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent2), var(--accent));
-  width: 0%;
-  transition: width 1.2s ease;
-}
+.gh-repo-lang { display: inline-flex; align-items: center; gap: 6px; }
+.gh-repo-lang-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; }
+
 
 /* ── TECH STACK ── */
 #techstack { background: var(--bg-deep); }
@@ -448,7 +560,7 @@ section::before {
   font-size: 0.7rem;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-light); font-weight: 600;
   margin-bottom: 14px;
 }
 .tech-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
@@ -461,7 +573,7 @@ section::before {
   padding: 8px 18px;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  color: var(--text-muted);
+  color: var(--text);
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   transition: all 0.2s;
   display: flex; align-items: center; gap: 8px;
@@ -515,7 +627,7 @@ section::before {
   font-size: 0.65rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-light); font-weight: 600;
   background: var(--accent-dim);
   padding: 3px 10px;
   display: inline-block;
@@ -597,11 +709,12 @@ section::before {
   color: var(--text);
 }
 .cert-issuer { font-size: 0.82rem; color: var(--text-muted); margin-top: 2px; }
+.cert-desc { font-size: 0.82rem; color: var(--text-muted); margin-top: 10px; }
 .cert-date {
   font-size: 0.7rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-light); font-weight: 600;
   margin-top: 4px;
 }
 
@@ -628,7 +741,7 @@ section::before {
   font-size: 0.65rem;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-light); font-weight: 600;
 }
 .contact-info-val { color: var(--text); font-size: 0.92rem; margin-top: 2px; }
 .contact-socials { display: flex; gap: 10px; margin-top: 32px; }
@@ -659,7 +772,7 @@ section::before {
   font-family: 'Inter', sans-serif;
   font-size: 0.9rem;
 }
-.form-control::placeholder { color: var(--text-muted) !important; }
+.form-control::placeholder { color: var(--placeholder) !important; }
 .form-control:focus {
   box-shadow: 0 0 0 2px rgba(0,212,255,0.2) !important;
   border-color: var(--accent) !important;
@@ -669,7 +782,7 @@ section::before {
   font-size: 0.7rem;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-light); font-weight: 600;
   margin-bottom: 6px;
 }
 .send-status { font-size: 0.85rem; margin-top: 10px; }
@@ -684,7 +797,7 @@ section::before {
   font-size: 0.7rem;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-light); font-weight: 600;
   margin-bottom: 24px;
 }
 .btn-send {
@@ -722,7 +835,7 @@ footer .footer-sub { margin-top: 4px; font-size: 0.75rem; }
 /* ── RESPONSIVE ── */
 @media (max-width: 767px) {
   section { padding: 64px 0; }
-  .github-stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .gh-profile-stats { grid-template-columns: repeat(3, 1fr); }
   .contact-socials { flex-wrap: wrap; }
   .hero-name { font-size: 3rem; }
   .hero-eyebrow { letter-spacing: 3px; }
