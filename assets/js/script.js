@@ -1,12 +1,6 @@
-/* ============================================================
-   PORTFOLIO — script.js
-   GitHub Live Data · Scroll Reveal · Skill Bars · Active Nav · Contact
-   ============================================================ */
+const GITHUB_USERNAME = 'rmgacis'; 
 
-/* ── CONFIG ── */
-const GITHUB_USERNAME = 'rmgacis'; // ← CHANGE THIS to your GitHub username
 
-/* ── GITHUB LIVE DATA ── */
 async function loadGitHub() {
   try {
     const [userRes, reposRes] = await Promise.all([
@@ -43,7 +37,6 @@ async function loadGitHub() {
   }
 }
 
-/* ── LATEST REPO CARD ── */
 function renderLatestRepo(repo) {
   const el = document.getElementById('gh-latest-repo');
   if (!el) return;
@@ -72,7 +65,6 @@ function renderLatestRepo(repo) {
   `;
 }
 
-/* ── CONTRIBUTION CALENDAR ── */
 async function loadContributionCalendar() {
   const grid = document.getElementById('gh-calendar');
   if (!grid) return;
@@ -93,7 +85,6 @@ async function loadContributionCalendar() {
   }
 }
 
-/* ── SCROLL REVEAL ── */
 function initScrollReveal() {
   const reveals   = document.querySelectorAll('.reveal');
   const revealObs = new IntersectionObserver(entries => {
@@ -108,7 +99,6 @@ function initScrollReveal() {
   reveals.forEach(el => revealObs.observe(el));
 }
 
-/* ── SKILL BARS ── */
 function initSkillBars() {
   const barObs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -124,7 +114,6 @@ function initSkillBars() {
   document.querySelectorAll('#techstack .col-lg-8').forEach(el => barObs.observe(el));
 }
 
-/* ── ACTIVE NAV HIGHLIGHT ── */
 function initActiveNav() {
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
@@ -142,7 +131,6 @@ function initActiveNav() {
   sections.forEach(s => navObs.observe(s));
 }
 
-/* ── CONTACT FORM ── */
 function sendMessage() {
   const name    = document.getElementById('cf-name').value.trim();
   const email   = document.getElementById('cf-email').value.trim();
@@ -160,7 +148,6 @@ function sendMessage() {
   const mailBody = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
   const mailSubj = encodeURIComponent(subject || 'Portfolio Contact');
 
-  // Opens the user's default mail client
   window.location.href = `mailto:ronaldmischa@gmail.com?subject=${mailSubj}&body=${mailBody}`;
 
   status.style.display = 'block';
@@ -168,14 +155,13 @@ function sendMessage() {
   status.innerHTML     = '<i class="fas fa-check-circle me-1"></i> Opening your mail client…';
 }
 
-/* ── INIT ── */
 document.addEventListener('DOMContentLoaded', () => {
   loadGitHub();
   initScrollReveal();
   initSkillBars();
   initActiveNav();
 });
-/* ── BACK TO TOP ── */
+
 function initBackToTop() {
   const btn = document.getElementById('backToTop');
   if (!btn) return;
