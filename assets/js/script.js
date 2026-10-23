@@ -1,147 +1,30 @@
-const GITHUB_USERNAME = 'rmgacis'; 
-
-
-async function loadGitHub(isRetry = false) {
-  try {
-    const [userRes, reposRes] = await Promise.all([
-      fetch(`https://api.github.com/users/${GITHUB_USERNAME}`),
-      fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`)
-    ]);
-
-    if (!userRes.ok) {
-      if (userRes.status === 403 || userRes.status === 429) {
-        throw new Error('rate-limited');
-      }
-      throw new Error('GitHub API error');
-    }
-
-    const user  = await userRes.json();
-    const repos = await reposRes.json();
-
-    document.getElementById('gh-avatar').src   = user.avatar_url ?? '';
-    document.getElementById('gh-name').textContent   = (user.name || user.login || '—').toUpperCase();
-    document.getElementById('gh-handle').textContent  = `@${user.login}`;
-    document.getElementById('gh-bio').textContent     = user.bio || '';
-    document.getElementById('gh-repos').textContent     = user.public_repos ?? '—';
-    document.getElementById('gh-followers').textContent = user.followers     ?? '—';
-    document.getElementById('gh-following').textContent = user.following    ?? '—';
-
-    renderLatestRepo(Array.isArray(repos) ? repos.find(r => !r.fork) || repos[0] : null);
-
-    document.getElementById('gh-loading').style.display = 'none';
-    document.getElementById('gh-data').style.display    = 'block';
-
-    loadContributionCalendar();
-
-  } catch (e) {
-    if (!isRetry) {
-      setTimeout(() => loadGitHub(true), 1500);
-      return;
-    }
-
-    document.getElementById('gh-loading').style.display = 'none';
-    const errorBox = document.getElementById('gh-error');
-    if (e.message === 'rate-limited') {
-      errorBox.innerHTML = `<i class="fas fa-clock me-2"></i> GitHub's public API limit was reached for this site right now. Please refresh in a few minutes — or <a href="https://github.com/${GITHUB_USERNAME}" target="_blank" style="color:var(--accent);">view the profile directly →</a>`;
-    } else {
-      errorBox.innerHTML = `<i class="fas fa-exclamation-triangle me-2"></i> Could not load GitHub data. <a href="https://github.com/${GITHUB_USERNAME}" target="_blank" style="color:var(--accent);">View profile directly →</a>`;
-    }
-    errorBox.style.display = 'block';
-  }
-}
-
-function renderLatestRepo(repo) {
-  const el = document.getElementById('gh-latest-repo');
-  if (!el) return;
-
-  if (!repo) {
-    el.innerHTML = '<p style="color:var(--text-muted); font-size:0.85rem;">No public repositories yet.</p>';
-    return;
-  }
-
-  const updated = new Date(repo.updated_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-
-  el.innerHTML = `
-    <div class="gh-repo-top">
-      <div class="gh-repo-icon"><i class="fas fa-code-branch"></i></div>
-      <div class="gh-repo-meta">
-        <span><i class="far fa-star"></i> ${repo.stargazers_count}</span>
-        <span><i class="fas fa-code-fork"></i> ${repo.forks_count}</span>
-      </div>
-    </div>
-    <a href="${repo.html_url}" target="_blank" class="gh-repo-name">${repo.name} <i class="fas fa-arrow-up-right-from-square" style="font-size:0.7rem;"></i></a>
-    <p class="gh-repo-desc">${repo.description || 'Public GitHub repository.'}</p>
-    <div class="gh-repo-footer">
-      <span class="gh-repo-lang">${repo.language ? `<span class="gh-repo-lang-dot"></span> ${repo.language}` : ''}</span>
-      <span>Updated ${updated}</span>
-    </div>
-  `;
-}
-
-async function loadContributionCalendar() {
-  const grid = document.getElementById('gh-calendar');
-  if (!grid) return;
-
-  try {
-    const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}`);
-    if (!res.ok) throw new Error('Calendar API error');
-    const data = await res.json();
-
-    const days = (data.contributions || []).slice(-371); 
-    grid.innerHTML = days.map(d => {
-      const dateLabel = new Date(d.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-      return `<div class="gh-day-cell" data-level="${d.level}" title="${d.count} contributions on ${dateLabel}"></div>`;
-    }).join('');
-
-  } catch (e) {
-    grid.innerHTML = '<p style="color:var(--text-muted); font-size:0.85rem;">Contribution calendar unavailable right now.</p>';
-  }
-}
-
-function initScrollReveal() {
-  const reveals   = document.querySelectorAll('.reveal');
-  const revealObs = new IntersectionObserver(entries => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        revealObs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-
-  reveals.forEach(el => revealObs.observe(el));
-}
-
-function initSkillBars() {
-  const barObs = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
-          bar.style.width = bar.dataset.width + '%';
-        });
-        barObs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.3 });
-
-  document.querySelectorAll('#techstack .col-lg-8').forEach(el => barObs.observe(el));
-}
-
 function initActiveNav() {
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-link');
-
-  const navObs = new IntersectionObserver(entries => {
+  const links = document.querySelectorAll('.rail nav a, .menu a');
+  const obs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(l => l.classList.remove('active'));
-        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
-        if (active) active.classList.add('active');
-      }
+      if (!entry.isIntersecting) return;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === `#${entry.target.id}`));
     });
-  }, { threshold: 0.4 });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  document.querySelectorAll('main section[id]').forEach(s => obs.observe(s));
+}
 
-  sections.forEach(s => navObs.observe(s));
+function initMenu() {
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('menu');
+  if (!btn || !menu) return;
+  const set = open => {
+    menu.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open);
+  };
+  btn.addEventListener('click', () => set(!menu.classList.contains('open')));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => set(false)));
+}
+
+function initBackToTop() {
+  const btn = document.getElementById('backToTop');
+  if (!btn) return;
+  window.addEventListener('scroll', () => btn.classList.toggle('visible', window.scrollY > 400));
 }
 
 function sendMessage() {
@@ -151,41 +34,57 @@ function sendMessage() {
   const message = document.getElementById('cf-message').value.trim();
   const status  = document.getElementById('cf-status');
 
+  status.style.display = 'block';
   if (!name || !email || !message) {
-    status.style.display = 'block';
-    status.style.color   = '#ff6b6b';
-    status.innerHTML     = '<i class="fas fa-exclamation-circle me-1"></i> Please fill in all required fields.';
+    status.style.color = '#ff6b6b';
+    status.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please fill in your name, email, and message.';
     return;
   }
 
-  const mailBody = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-  const mailSubj = encodeURIComponent(subject || 'Portfolio Contact');
+  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+  const subj = encodeURIComponent(subject || 'Portfolio Contact');
+  window.location.href = `mailto:ronaldmischa@gmail.com?subject=${subj}&body=${body}`;
 
-  window.location.href = `mailto:ronaldmischa@gmail.com?subject=${mailSubj}&body=${mailBody}`;
+  status.style.color = '#22d3a0';
+  status.innerHTML = '<i class="fas fa-check-circle"></i> Opening your mail client…';
+}
 
-  status.style.display = 'block';
-  status.style.color   = '#22d3a0';
-  status.innerHTML     = '<i class="fas fa-check-circle me-1"></i> Opening your mail client…';
+function initReveal() {
+  const targets = document.querySelectorAll(
+    'main .lead, main .sec-head, main .sub-title, main .card, main .about > div > p'
+  );
+  if (!('IntersectionObserver' in window)) return;
+
+  const counts = new Map();
+  targets.forEach(el => {
+    const parent = el.parentElement;
+    const i = counts.get(parent) || 0;
+    counts.set(parent, i + 1);
+    el.style.transitionDelay = `${Math.min(i, 5) * 80}ms`;
+    el.classList.add('reveal');
+  });
+
+  const obs = new IntersectionObserver((entries, o) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      el.classList.add('in');
+      o.unobserve(el);
+      el.addEventListener('transitionend', function done(e) {
+        if (e.propertyName !== 'opacity') return;
+        el.classList.remove('reveal', 'in');
+        el.style.transitionDelay = '';
+        el.removeEventListener('transitionend', done);
+      });
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+  targets.forEach(el => obs.observe(el));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  loadGitHub();
-  initScrollReveal();
-  initSkillBars();
   initActiveNav();
+  initMenu();
+  initBackToTop();
+  initReveal();
 });
-
-function initBackToTop() {
-  const btn = document.getElementById('backToTop');
-  if (!btn) return;
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 400) {
-      btn.classList.add('visible');
-    } else {
-      btn.classList.remove('visible');
-    }
-  });
-}
-
-document.addEventListener('DOMContentLoaded', initBackToTop);
