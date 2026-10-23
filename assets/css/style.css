@@ -954,3 +954,79 @@ footer {
     transform: none
   }
 }
+
+/* === Light / dark mode (dark is the default) === */
+:root { color-scheme: dark; --accent-contrast: #0a0e16; --topbar-bg: rgba(10,14,22,.94); --project-copy: #d3dbe9; --project-veil: rgba(10,14,22,.94); --project-chip: rgba(10,14,22,.6); --project-rule: rgba(255,255,255,.1); }
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f5f8fc;
+  --panel: #ffffff;
+  --panel2: #edf4fa;
+  --line: rgba(0,105,145,.22);
+  --accent: #006f96;
+  --gold: #aa7513;
+  --text: #17253a;
+  --muted: #4e6077;
+  --accent-contrast: #ffffff;
+  --topbar-bg: rgba(245,248,252,.94);
+  --project-copy: #e5edf7;
+  --project-veil: rgba(10,14,22,.94);
+  --project-chip: rgba(10,14,22,.6);
+  --project-rule: rgba(255,255,255,.2);
+}
+/* Preserve readability for buttons and image-based project cards. */
+.btn.fill, #backToTop { color: var(--accent-contrast); }
+:root[data-theme="light"] .btn.fill:hover { background: #005d80; }
+:root[data-theme="light"] .socials a:hover { color: #fff; }
+:root[data-theme="light"] .proj { color: #f2f6fc; }
+:root[data-theme="light"] .proj p { color: var(--project-copy); }
+:root[data-theme="light"] .proj-foot a { color: #61e2ff; }
+:root[data-theme="light"] .proj .chip { color: #f2f6fc; }
+:root[data-theme="light"] .proj-thumb .badge { color: #f2f6fc; }
+:root[data-theme="light"] .proj-thumb > i { color: #61e2ff; }
+:root[data-theme="light"] .proj-thumb::after { background: linear-gradient(to top,rgba(10,14,22,.95) 8%,rgba(10,14,22,.55) 60%,rgba(10,14,22,.7)); }
+:root[data-theme="light"] .proj-thumb { background: linear-gradient(135deg,#17253a,#0a0e16); }
+:root[data-theme="light"] .status { color: #087c57; }
+:root[data-theme="light"] .form input::placeholder,
+:root[data-theme="light"] .form textarea::placeholder { color: #65758a; }
+@media (max-width:991px) {
+  .topbar { background: var(--topbar-bg); }
+  .topbar .theme-toggle-mobile { flex: 0 0 38px; }
+}
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color .2s, background-color .2s, color .2s;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.theme-toggle-mobile { display: none; }
+.theme-toggle-desktop { width: 100%; }
+@media (max-width:991px) {
+  .theme-toggle-desktop { display: none; }
+  .topbar .theme-toggle-mobile {
+    display: inline-flex;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    flex-shrink: 0;
+    border-radius: 8px;
+  }
+}
+
+:root[data-theme="light"] .facts i,
+:root[data-theme="light"] .ach-icon,
+:root[data-theme="light"] .c-item i,
+:root[data-theme="light"] .proj-icon { background: rgba(0,111,150,.09); }
+:root[data-theme="light"] .rail nav a.active { background: rgba(0,111,150,.08); }
+:root[data-theme="light"] .proj .proj-thumb .badge { background: rgba(10,14,22,.75); }

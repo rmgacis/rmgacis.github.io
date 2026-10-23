@@ -20,12 +20,18 @@
     rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
-  <script>document.documentElement.classList.add('js')</script>
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      document.documentElement.dataset.theme = localStorage.getItem('portfolio-theme') === 'light' ? 'light' : 'dark';
+    } catch (e) { document.documentElement.dataset.theme = 'dark'; }
+  </script>
 </head>
 
 <body>
   <header class="topbar">
     <img src="assets/img/portfolio-pfp.jpg" alt="" /><b>Ronald Gacis</b>
+    <button type="button" class="theme-toggle theme-toggle-mobile" aria-label="Switch to light mode" title="Switch to light mode"><i class="fas fa-sun" aria-hidden="true"></i></button>
     <button id="menuBtn" aria-label="Toggle menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
   </header>
   <nav class="menu" id="menu" aria-label="Sections"><a href="#about">About</a><a href="#education">Education</a><a
@@ -48,13 +54,14 @@
           href="#skills">Skills</a><a href="#projects">Projects</a><a href="#achievements">Achievements</a><a
           href="#contact">Contact</a></nav>
       <div class="rail-foot">
+        <button type="button" class="theme-toggle theme-toggle-desktop" aria-label="Switch to light mode" title="Switch to light mode"><i class="fas fa-sun" aria-hidden="true"></i><span class="theme-toggle-label">Light mode</span></button>
         <a href="assets/files/RESUME (Ronald Gacis).pdf" class="btn fill" download><i class="fas fa-download"></i>
           Download CV</a>
-        <div class="socials"><a href="https://github.com/rmgacis" target="_blank" rel="noopener" aria-label="GitHub"><i
-              class="fab fa-github"></i></a><a href="https://linkedin.com/in/ronald-gacis-64ba86339/" target="_blank"
+        <div class="socials"><a href="https://github.com/rmgacis"  rel="noopener" aria-label="GitHub"><i
+              class="fab fa-github"></i></a><a href="https://linkedin.com/in/ronald-gacis-64ba86339/" 
             rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a><a
-            href="https://facebook.com/mischa.gacis" target="_blank" rel="noopener" aria-label="Facebook"><i
-              class="fab fa-facebook-f"></i></a><a href="https://www.instagram.com/r_gacis27" target="_blank"
+            href="https://facebook.com/mischa.gacis"  rel="noopener" aria-label="Facebook"><i
+              class="fab fa-facebook-f"></i></a><a href="https://www.instagram.com/r_gacis27" 
             rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a></div>
       </div>
     </aside>
@@ -111,7 +118,7 @@
               <div class="when">2024 – Present</div>
               <h3>BS Information Technology</h3>
               <div class="school">Polytechnic University of the Philippines, Sto. Tomas</div>
-              <p>Web &amp; mobile development. Coursework: Data Structures, Database Management, Software Engineering,
+              <p>Learning simple and complex Web &amp; mobile development. As well as Data Structures, Database Management, Software Engineering,
                 Network Administration, Capstone Project.</p>
             </div>
             <div class="card">
@@ -174,7 +181,7 @@
               <p>E-commerce site for a watch brand, with a PHP and MySQL backend powering a Bootstrap storefront.</p>
               <div class="tags"><span class="chip">PHP</span><span class="chip">MySQL</span><span
                   class="chip">Bootstrap</span></div>
-              <div class="proj-foot"><a href="https://github.com/rmgacis/chronos" target="_blank" rel="noopener"><i
+              <div class="proj-foot"><a href="https://github.com/rmgacis/chronos"  rel="noopener"><i
                     class="fab fa-github"></i> Code</a></div>
             </article>
             <article class="card proj">
@@ -200,7 +207,7 @@
               <p>Pygame tower defense where humanity fights endless monster waves, with weapons you upgrade as
                 difficulty rises.</p>
               <div class="tags"><span class="chip">Python</span><span class="chip">Pygame</span></div>
-              <div class="proj-foot"><a href="https://github.com/rmgacis/Pixel-Defense" target="_blank"
+              <div class="proj-foot"><a href="https://github.com/rmgacis/Pixel-Defense" 
                   rel="noopener"><i class="fab fa-github"></i> Code</a></div>
             </article>
             <article class="card proj">
@@ -214,7 +221,7 @@
               <p>This site: built to showcase my projects, skills, and journey as an IT student.</p>
               <div class="tags"><span class="chip">HTML</span><span class="chip">CSS</span><span
                   class="chip">JavaScript</span></div>
-              <div class="proj-foot"><a href="https://github.com/rmgacis/rmgacis.github.io" target="_blank"
+              <div class="proj-foot"><a href="https://github.com/rmgacis/rmgacis.github.io" 
                   rel="noopener"><i class="fab fa-github"></i> Code</a></div>
             </article>
           </div>
@@ -236,7 +243,7 @@
               <p>A personal image collection featuring Elden Ring by FromSoftware.</p>
               <div class="tags"><span class="chip">HTML</span><span class="chip">CSS</span><span
                   class="chip">Bootstrap</span></div>
-              <div class="proj-foot"><a href="/Web-Development/A01" target="_blank" rel="noopener"><i
+              <div class="proj-foot"><a href="/Web-Development/A01"  rel="noopener"><i
                     class="fab fa-github"></i> Code</a></div>
             </article>
             <article class="card proj">
@@ -250,7 +257,7 @@
               <p>A web app featuring the finest assassins in the universe of Mobile Legends: Bang Bang.</p>
               <div class="tags"><span class="chip">HTML</span><span class="chip">CSS</span><span
                   class="chip">Bootstrap</span><span class="chip">JSON</span></div>
-              <div class="proj-foot"><a href="/Web-Development/A02" target="_blank" rel="noopener"><i
+              <div class="proj-foot"><a href="/Web-Development/A02"  rel="noopener"><i
                     class="fab fa-github"></i> Code</a></div>
             </article>
           </div>

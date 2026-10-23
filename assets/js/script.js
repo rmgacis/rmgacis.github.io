@@ -88,3 +88,27 @@ document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
   initReveal();
 });
+
+function initThemeToggle() {
+  const root = document.documentElement;
+  const toggles = document.querySelectorAll('.theme-toggle');
+  const updateButtons = () => {
+    const light = root.dataset.theme === 'light';
+    toggles.forEach(btn => {
+      const label = light ? 'Switch to dark mode' : 'Switch to light mode';
+      btn.setAttribute('aria-label', label);
+      btn.title = label;
+      btn.querySelector('i').className = light ? 'fas fa-moon' : 'fas fa-sun';
+      const text = btn.querySelector('.theme-toggle-label');
+      if (text) text.textContent = light ? 'Dark mode' : 'Light mode';
+    });
+  };
+  toggles.forEach(btn => btn.addEventListener('click', () => {
+    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+    root.dataset.theme = next;
+    try { localStorage.setItem('portfolio-theme', next); } catch (e) {}
+    updateButtons();
+  }));
+  updateButtons();
+}
+document.addEventListener('DOMContentLoaded', initThemeToggle);
